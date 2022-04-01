@@ -6,45 +6,118 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/dist/mindar-face-aframe.prod.js"></script>
   <style>
-    .example-container {
+
+    *{
+      margin: 0;
+    }
+
+    .options-panel::-webkit-scrollbar {       
+      height: 10px;
+    }
+
+    .options-panel::-webkit-scrollbar-track {
+      background: rgb(218, 198, 250);        /* color of the tracking area */
+    }
+
+    .options-panel::-webkit-scrollbar-thumb {
+      background-color: rgb(149, 89, 254);    /* color of the scroll thumb */
+      border-radius: 20px;       /* roundness of the scroll thumb */
+      border: 1px solid rgb(218, 198, 250);  /* creates padding around scroll thumb */
+    }
+
+    .container {
       overflow: hidden;
       position: absolute;
       width: 100%;
       height: 100%;
     }
     .options-panel {
-      position: fixed;
-      /* left: 35%;
-      top: 80%; */
+      background-color: rgba(171, 184, 255, 0.438);
+      display: flex;  
+      overflow-x: scroll;
       z-index: 2;
+      /* position: fixed;
+      bottom: 0; */
     }
     .options-panel img {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      border: solid 2px;
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      cursor: pointer;
+      border: solid 1px;
+      border-color: white;
+      width: 100px;
+      height: 100px;
+      cursor: pointer; 
+      border-radius: 50px;
+      margin: 20px;
     }
     .options-panel img.selected {
-      border-color: green;
+      background-color: green;
     }
+
+    .logos{
+      background-color: rgb(218, 198, 250);
+      display: flex;
+      justify-content: space-around;
+      align-items: baseline;
+      padding-bottom: 30px;
+      padding-top: 10px;
+    }
+
+/*     .logos img{
+      width: 200px;
+    } */
+
+    @media (max-width: 700px) {
+      .options-panel img {
+        border: solid 1px;
+        border-color: white;
+        width: 75px;
+        height: 75px;
+        cursor: pointer; 
+        border-radius: 50px;
+        margin: 20px;
+      }
+      #vitrineaTitle{
+        width: 250px;
+        height: 80px
+      }
+      #vitrineaLogo{
+        width: 50;
+        height: 50
+      }
+      .options-panel::-webkit-scrollbar {       
+          height: 0px;
+        }
+    }
+    
   </style>
   </head>
   <body>
+    
+    <div class="logos">
+      <div></div>
+      <img id="vitrineaTitle" src="./../images/large.png" width="400px" height="150px" alt="Vitrinea" >
+      <img id="vitrineaLogo" src="./../images/vitrinea.png" width="100px" height="100px" alt="Vitrinea" >
+    </div>
 
-    <div class="example-container">
-      <div class="options-panel">
-        <img id="sunGlassesBtn" src="./../images/sun.png"/>
-        <img id="normalGlassesBtn" src="./../images/normal.png"/>
-        <img id="woodGlassesBtn" src="./../images/wood.png"/>
-      </div>
+    <div class="options-panel">
+      <img id="sunGlassesBtn" src="./../images/sun.png"/>
+      <img id="normalGlassesBtn" src="./../images/normal.png"/>
+      <img id="woodGlassesBtn" src="./../images/wood.png"/>
 
-    <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      <img id="sunGlassesBtn" src="./../images/sun.png"/>
+      <img id="normalGlassesBtn" src="./../images/normal.png"/>
+      <img id="woodGlassesBtn" src="./../images/wood.png"/>
+      <img id="sunGlassesBtn" src="./../images/sun.png"/>
+      <img id="normalGlassesBtn" src="./../images/normal.png"/>
+      <img id="woodGlassesBtn" src="./../images/wood.png"/>
+      <img id="sunGlassesBtn" src="./../images/sun.png"/>
+      <img id="normalGlassesBtn" src="./../images/normal.png"/>
+      <img id="woodGlassesBtn" src="./../images/wood.png"/>
+    </div>
+    
+    <div class="container">
+
+      <a-scene mindar-face embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
-          <!-- <a-asset-item id="glassesModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.4/examples/image-tracking/assets/glasses/scene.gltf"></a-asset-item> -->
           <a-asset-item id="headModel" src="./../headOccluder.glb"></a-asset-item>
           <a-asset-item id="normalGlassesModel" src="./../normalGlasses/scene.gltf"></a-asset-item>
           <a-asset-item id="sunGlassesModel" src="./../sunGlasses/scene.gltf"></a-asset-item>
@@ -57,9 +130,10 @@
         <a-gltf-model mindar-face-occluder position="0 -0.3 0.15"rotation="0 0 0" scale="0.065 0.065 0.065" src="#headModel"></a-gltf-model>
         <a-gltf-model rotation="0 0 0" position="0 0 -0.45" scale="0.008 0.008 0.008" src="#sunGlassesModel" id="sunGlasses"></a-gltf-model>
         <a-gltf-model rotation="0 0 0" position="0 0 -0.46" scale="0.53 0.53 0.53" src="#normalGlassesModel" id="normalGlasses"></a-gltf-model>
-        <a-gltf-model rotation="0 0 0" position="0 0 0" scale="0.5 0.5 0.5" src="#woodGlassesModel" id="woodGlasses"></a-gltf-model>
+        <a-gltf-model rotation="0 0 0" position="0 0 -0.1" scale="0.52 0.52 0.52" src="#woodGlassesModel" id="woodGlasses"></a-gltf-model>
         </a-entity>
       </a-scene>
+    </div>
 
 <!--     <button id="sunGlassesBtn" style="width: 100px; height: 50px; color: red;">Show</button>
     <button id="normalGlassesBtn" style="width: 100px; height: 50px; color: red;">Show</button>
